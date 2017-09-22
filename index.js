@@ -1,10 +1,7 @@
-
-var express = require('express');
-var port = process.env.PORT || 3000;
-var app = express.createServer();
-
-app.get('/', function(request, response) {
-    response.sendfile(__dirname + '/index.html');
-}).configure(function() {
-    app.use('/images', express.static(__dirname + '/images'));
-}).listen(port);
+var static = require('node-static');
+var file = new static.Server();
+require('http').createServer(function(request, response) {
+  request.addListener('end', function() {
+    file.serve(request, response);
+  }).resume();
+}).listen(process.env.PORT || 3000);
