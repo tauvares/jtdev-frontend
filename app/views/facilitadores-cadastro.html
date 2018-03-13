@@ -1,0 +1,234 @@
+<div class="container">
+  <div class="row">
+      <div class="col-xs-12">
+         <ul class="breadcrumb">
+             <li><a  ui-sref="app">Home</a></li>
+             <li class="active">Gerenciar Facilitadores</li>
+         </ul>
+      </div>
+      <div class="col-xs-12">
+         <h3>Facilitadores Cadastrados</h3>
+         <hr>
+      </div>
+  </div>
+  <div class="row row-content">
+      <div class="col-xs-12">
+        <h4>Buscar Facilitador &nbsp;&nbsp;&nbsp;
+           <small>Nome: &nbsp;
+                <input ng-model="filtraNome">
+           </small>
+        </h4>
+      </div>
+      <div class="col-xs-12" ng-if="showFacilitadores">
+            <div class="no-more-tables">
+              <!--
+                <table class="table table-striped table-bordered">
+              -->
+                <table >
+                  <thead>
+                    <tr>
+                        <th class="thead-inverse">Foto</th>
+                        <th class="thead-inverse">UF</th>
+                        <th class="thead-inverse">Ativo</th>
+                        <th class="thead-inverse">Nome</th>
+                        <th class="thead-inverse">Profissão</th>
+                        <th class="thead-inverse">Email</th>
+                        <th class="thead-inverse">Cel</th>
+                        <th class="thead-inverse">Fixo</th>
+                        <th class="thead-inverse">Cidade</th>
+                        <th class="thead-inverse">Facebook</th>
+                        <th class="thead-inverse">Instagram</th>
+                        <th class="thead-inverse">Twitter</th>
+                        <th class="thead-inverse">Linkedin</th>
+                        <th class="thead-inverse">Site</th>
+                        <th class="thead-inverse">CV</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="fac in facilitadores | filter: {nome: filtraNome}">
+                        <td><a ng-click="editFacilitador(fac)"><img width="60" class="img-circle" height="60" ng-src="{{fac.foto}}"/></a></td>
+                        <td><a ng-click="editFacilitador(fac)">{{fac.uf}}</a></td>
+                        <td><a ng-click="editFacilitador(fac)">{{fac.ativo}}</a></td>
+                        <td><a ng-click="editFacilitador(fac)">{{fac.nome}}</a></td>
+                        <td><a ng-click="editFacilitador(fac)">{{fac.profissao}}</a></td>
+                        <td><a ng-click="editFacilitador(fac)">{{fac.email}}</a></td>
+                        <td><a ng-click="editFacilitador(fac)">{{fac.celular}}</a></td>
+                        <td><a ng-click="editFacilitador(fac)">{{fac.fixo}}</a></td>
+                        <td><a ng-click="editFacilitador(fac)">{{fac.cidade}}</a></td>
+                        <td><a ng-click="editFacilitador(fac)">{{fac.facebook}}</a></td>
+                        <td><a ng-click="editFacilitador(fac)">{{fac.instagram}}</a></td>
+                        <td><a ng-click="editFacilitador(fac)">{{fac.twitter}}</a></td>
+                        <td><a ng-click="editFacilitador(fac)">{{fac.linkedin}}</a></td>
+                        <td><a ng-click="editFacilitador(fac)">{{fac.site}}</a></td>
+                        <td><a ng-click="editFacilitador(fac)">{{fac.curriculum}}</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+      </div>
+  </div>
+
+  <div id="cadastro" class="row row-content">
+      <div class="col-xs-12">
+          <h3>Criar/Alterar/Excluir Facilitadores</h3>
+      </div>
+      <div class="col-xs-12 col-sm-9">
+          <form class="form-horizontal" name="facilitadorForm" ng-submit="saveFacilitador()" novalidate>
+            <div class="form-group" ng-class="{ 'has-error' : facilitadorForm.nome.$error.required && !facilitadorForm.nome.$pristine }">
+                <label for="nome" class="col-sm-2 control-label">Nome Completo *</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Entrar nome completo" ng-model="facilitador.nome" required>
+                    <span ng-show="facilitadorForm.nome.$error.required && !facilitadorForm.nome.$pristine" class="help-block">O nome do facilitador é obrigatório.</span>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : facilitadorForm.ativo.$error.required && !facilitadorForm.ativo.$pristine }">
+                <label for="ativo" class="col-sm-2 control-label">Ativo *</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="ativo" name="ativo" ng-model="facilitador.ativo" required>
+                      <option value="S">SIM</option>
+                      <option value="N">NÃO</option>
+                    </select>
+                    <span ng-show="facilitadorForm.ativo.$error.required && !facilitadorForm.ativo.$pristine" class="help-block">O status do facilitador é obrigatório.</span>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : facilitadorForm.profissao.$error.required && !facilitadorForm.profissao.$pristine }">
+                <label for="profissao" class="col-sm-2 control-label">Profissão *</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="profissao" name="profissao" placeholder="Entrar com a profissão" ng-model="facilitador.profissao" required>
+                    <span ng-show="facilitadorForm.profissao.$error.required && !facilitadorForm.profissao.$pristine" class="help-block">A profissão do facilitador é obrigatória.</span>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error has-guest' : facilitadorForm.email.$invalid && !facilitadorForm.email.$pristine }">
+                <label for="email" class="col-sm-2 control-label">E-mail *</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" ng-model="facilitador.email" required>
+                    <span ng-show="facilitadorForm.email.$invalid && !facilitadorForm.email.$pristine" class="glyphicon glyphicon-remove form-control-event" aria-hidden="true"></span>
+                    <span ng-show="(facilitadorForm.email.$invalid || facilitadorForm.email.$error.required) && !facilitadorForm.email.$pristine" class="help-block">
+                        Entre um endereço de e-mail válido.
+                    </span>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : facilitadorForm.celular.$error.required && !facilitadorForm.celular.$pristine }">
+                <label for="celular" class="col-sm-2 control-label">Telefone Celular (com DDD) *</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="celular" name="celular" placeholder="(__) _____-____" ng-model="facilitador.celular" ui-mask="{{'(99) 99999-9999'}}" required>
+                    <span ng-show="facilitadorForm.celular.$error.required && !facilitadorForm.celular.$pristine" class="help-block">O telefone celular é obrigatório.</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phone" class="col-sm-2 control-label">Telefone Fixo (com DDD)</label>
+                <div class="col-sm-10">
+                    <input type="tel" class="form-control" id="fixo" name="fixo" placeholder="(__) ____-____" ui-mask="{{'(99) 9999-9999'}}" ng-model="facilitador.fixo">
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : facilitadorForm.uf.$error.required && !facilitadorForm.uf.$pristine }">
+                <label for="uf" class="col-sm-2 control-label">UF *</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="uf" name="uf" ng-model="facilitador.uf" required>
+                      <option value="">---Selecione um Estado---</option>
+                      <option value="AC">Acre</option>
+                      <option value="AL">Alagoas</option>
+                      <option value="AP">Amapá</option>
+                      <option value="AM">Amazonas</option>
+                      <option value="BA">Bahia</option>
+                      <option value="CE">Ceará</option>
+                      <option value="DF">Distrito Federal</option>
+                      <option value="ES">Espírito Santo</option>
+                      <option value="GO">Goiás</option>
+                      <option value="MA">Maranhão</option>
+                      <option value="MT">Mato Grosso</option>
+                      <option value="MS">Mato Grosso do Sul</option>
+                      <option value="MG">Minas Gerais</option>
+                      <option value="PA">Pará</option>
+                      <option value="PB">Paraíba</option>
+                      <option value="PR">Paraná</option>
+                      <option value="PE">Pernambuco</option>
+                      <option value="PI">Piauí</option>
+                      <option value="RJ">Rio de Janeiro</option>
+                      <option value="RN">Rio Grande do Norte</option>
+                      <option value="RS">Rio Grande do Sul</option>
+                      <option value="RO">Rondônia</option>
+                      <option value="RR">Roraima</option>
+                      <option value="SC">Santa Catarina</option>
+                      <option value="SP">São Paulo</option>
+                      <option value="SE">Sergipe</option>
+                      <option value="TO">Tocantins</option>
+                    </select>
+                    <span ng-show="facilitadorForm.uf.$error.required && !facilitadorForm.uf.$pristine" class="help-block">A UF é obrigatória.</span>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : facilitadorForm.cidade.$error.required && !facilitadorForm.cidade.$pristine }">
+                <label for="cidade" class="col-sm-2 control-label">Cidade *</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="cidade" name="cidade" placeholder="Cidade" ng-model="facilitador.cidade" required>
+                    <span ng-show="facilitadorForm.cidade.$error.required && !facilitadorForm.cidade.$pristine" class="help-block">A cidade é obrigatória.</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="facebook" class="col-sm-2 control-label">Facebook</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="facebook" name="facebook" placeholder="Facebook" ng-model="facilitador.facebook">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="instagram" class="col-sm-2 control-label">Instagram</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="instagram" name="instagram" placeholder="Instagram" ng-model="facilitador.instagram">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="twitter" class="col-sm-2 control-label">Twitter</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="twitter" name="twitter" placeholder="Twitter" ng-model="facilitador.twitter">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="linkedin" class="col-sm-2 control-label">Linkedin</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="linkedin" name="linkedin" placeholder="Linkedin" ng-model="facilitador.linkedin">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="site" class="col-sm-2 control-label">Website</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="site" name="site" placeholder="Website" ng-model="facilitador.site">
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : facilitadorForm.curriculum.$invalid && !facilitadorForm.curriculum.$pristine }">
+              <label for="curriculum" class="col-sm-2 control-label">Curriculum Vitae *</label>
+              <div class="col-sm-10">
+
+                  <textarea class="form-control" rows="12" ng-model="facilitador.curriculum" placeholder="Entre com um mini-curriculum" required></textarea>
+
+                  <span ng-show="facilitadorForm.curriculum.$invalid && !facilitadorForm.curriculum.$pristine" class="glyphicon glyphicon-remove form-control-event" aria-hidden="true"></span>
+                  <span ng-show="(facilitadorForm.curriculum.$invalid || facilitadorForm.curriculum.$error.required) && !facilitadorForm.curriculum.$pristine" class="help-block">
+                      Favor entrar com um mini-curriculum.
+                  </span>
+              </div>
+            </div>
+            <div class="form-group">
+                <label for="foto" class="col-sm-2 control-label">Foto</label>
+                <div class="col-sm-10">
+                    <input type="file" accept="image/*" id="foto" name="foto" onchange="angular.element(this).scope().carregaFoto(this)">
+                    <input type="hidden" id="foto1" name="foto1" ng-model="facilitador.foto">
+                    <img id="output" class="img-fluid" width="60" height="60" ng-src="{{facilitador.foto}}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success" ng-disabled="facilitadorForm.$invalid">Salvar Facilitador</button>
+                    <button class="btn btn-success" ng-click="deleteFacilitador(facilitador.id)">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true">
+                      </span> Excluir Facilitador
+                    </button>
+                </div>
+            </div>
+          </form>
+      </div>
+      <div class="col-xs-12 col-sm-3">
+
+      </div>
+  </div>
+
+
+</div>

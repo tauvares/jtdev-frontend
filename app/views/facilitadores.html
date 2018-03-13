@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="row">
+      <div class="col-xs-12">
+         <ul class="breadcrumb">
+             <li><a  ui-sref="app">Mapa</a></li>
+             <li class="active">Facilitadores Por Estado - {{estado}}</li>
+         </ul>
+      </div>
+      <div class="row">
+        <div class="col-xs-6">
+           <h3>Facilitadores Cadastrados - {{estado}}</h3>
+           <a ng-click="expandir = !expandir">Expandir/Recuar Todos</a>
+           <hr>
+        </div>
+        <div class="col-xs-6">
+          <a type="button" class="button btn btn-success" ui-sref="app.novo-facilitador">Gostaria de se tornar um facilitador? Clique Aqui!</a>
+        </div>
+      </div>
+  </div>
+  <!-- accordion angular-ui-bootstarp -->
+  <div class="row row-content">
+    <div >
+      <uib-accordion close-others="true">
+        <div uib-accordion-group class="panel-success" class="panel-default col-xs-12 col-sm-6 col-lg-4" ng-repeat="facilitador in facilitadores" is-open="expandir">
+          <uib-accordion-heading>
+            <div class="row">
+              <div class="col-xs-4 text-center meuContainer">
+
+                <img class="img-circle" ng-src="{{facilitador.foto}}"/>
+              <!--
+                <img class="img-circle" width="40" height="40" ng-src="{{facilitador.foto}}"/>
+                <img class="img-circle" style="vertical-align: middle; min-height: 40; max-height: 80; max-width: 100%; display: block; height: auto;"  ng-src="{{facilitador.foto}}"/>
+                -->
+              </div>
+              <div class="col-xs-7">
+                <p><small>Nome: <b>{{facilitador.nome}}</b></small></p>
+                <p><small> Prof.: <b>{{facilitador.profissao}}</b></small></p>
+                <p><small> Tel: <b>{{facilitador.fixo}}</b></small></p>
+                <p><small> Cel: <b>{{facilitador.celular}}</b></small></p>
+              </div>
+              <div class="col-xs-1">
+                <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': expandir, 'glyphicon-chevron-right': !expandir}"></i>
+              </div>
+            </div>
+          </uib-accordion-heading>
+          <div class="row">
+            <div class="col-xs-12">
+              <p><small>UF: <b>{{facilitador.uf}}</b></small></p>
+              <p><small>Cidade: <b>{{facilitador.cidade}}</b></small></p>
+              <p><small>Site: <b><a ng-href="http://{{facilitador.site}}" target="_blank">{{facilitador.site}}</a></b></small></p>
+              <p><small>CV: <b>{{facilitador.curriculum}}</b></small></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="btn-group btn-group-justified col-xs-12" role="group" aria-label="...">
+              <a ng-href="http://{{facilitador.facebook}}" role="button" class="btn btn-primary icons-lg fb-ic" target="_blank"><i class="fa fa-facebook"> </i></a>
+              <a ng-href="http://{{facilitador.twitter}}" role="button" class="btn btn-default icons-lg tw-ic" target="_blank"><i class="fa fa-twitter"> </i></a>
+              <a ng-href="http://{{facilitador.linkedin}}" role="button" class="btn btn-success icons-lg li-ic" target="_blank"><i class="fa fa-linkedin"> </i></a>
+              <a ng-href="http://{{facilitador.instagram}}" role="button" class="btn btn-danger icons-lg ins-ic" target="_blank"><i class="fa fa-instagram"> </i></a>
+            </div>
+          </div>
+        </div>
+      </uib-accordion>
+    </div>
+  </div>
+<!-- end accordion angular-ui-bootstarp -->
+
+</div>

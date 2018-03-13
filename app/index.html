@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="jtdev">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="João Tavares Web Page">
+    <meta name="author" content="João Tavares">
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+    <title>João Tavares - Web Developer</title>
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Modak:400' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+    <!-- build:css styles/jtdev.css -->
+    <!--<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">-->
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../node_modules/ng-dialog/css/ngDialog.min.css" rel="stylesheet">
+    <link href="../node_modules/ng-dialog/css/ngDialog-theme-default.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="styles/css/jtdev.min.css" rel="stylesheet">
+    <!-- endbuild -->
+  </head>
+  <body id="page-top">
+
+    <div ui-view="navegacao"></div>
+    <div ui-view="cabecalho"></div>
+
+    <div ui-view="conteudo"></div>
+
+    <div ui-view="rodape"></div>
+
+    <!-- build:js scripts/jtdev.js -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Plugin JavaScript -->
+    <script src="../node_modules/jquery.easing/jquery.easing.min.js"></script>
+    <!-- Contact form JavaScript -->
+    <script src="scripts/frontend/jqBootstrapValidation.js"></script>
+    <script src="scripts/frontend/contact_me.js"></script>
+    <!-- Custom scripts for this template -->
+    <script src="scripts/frontend/jtdev.min.js"></script>
+    <!--daqui para baixo veio de outras aplicações-->
+    <script src="../node_modules/angular/angular.js"></script>
+    <script src="../node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="../node_modules/angular-resource/angular-resource.js"></script>
+    <script src="../node_modules/ng-dialog/js/ngDialog.min.js"></script>
+
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/controllers.js"></script>
+    <script src="scripts/controllers/usuario-controller.js"></script>
+
+    <script src="scripts/services/lb-services.js"></script>
+    <script src="scripts/services/auth.js"></script>
+
+    <!-- endbuild -->
+  </body>
+
+</html>
